@@ -1,35 +1,35 @@
-name: Notion to GitHub TIL Sync
+# name: Notion to GitHub TIL Sync
 
-on:
-  schedule:
-    - cron: '0 1 * * *'  # 매일 오전 10시(KST) 실행
-  workflow_dispatch:
+# on:
+#   schedule:
+#     - cron: '0 1 * * *'  # 매일 오전 10시(KST) 실행
+#   workflow_dispatch:
 
-jobs:
-  notion-sync:
-    runs-on: ubuntu-latest
+# jobs:
+#   notion-sync:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v3
+#     steps:
+#       - uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
+#       - name: Set up Python
+#         uses: actions/setup-python@v4
+#         with:
+#           python-version: '3.10'
 
-      - name: Install requests
-        run: pip install requests
+#       - name: Install requests
+#         run: pip install requests
 
-      - name: Sync from Notion
-        run: python notion_to_md.py
-        env:
-          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+#       - name: Sync from Notion
+#         run: python notion_to_md.py
+#         env:
+#           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+#           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
 
-      - name: Commit and Push
-        run: |
-          git config --global user.name "Notion Sync Bot"
-          git config --global user.email "bot@github.com"
-          git add .
-          git commit -m "docs: Sync TIL from Notion" || echo "No changes"
-          git push
+#       - name: Commit and Push
+#         run: |
+#           git config --global user.name "Notion Sync Bot"
+#           git config --global user.email "bot@github.com"
+#           git add .
+#           git commit -m "docs: Sync TIL from Notion" || echo "No changes"
+#           git push
